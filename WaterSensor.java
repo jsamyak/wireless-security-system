@@ -5,41 +5,26 @@
  */
 
 
-public class WaterSensor {
+public class WaterSensor extends SecurityDevice{
 	
 //  Driver Method for testing.
-//	public static void main(String[] args) {
-//		WaterSensor sensor = new WaterSensor();
-//		sensor.setWaterLevel(100);
-//		sensor.armDevice(false);
-//		sensor.sendAlert();
-//
-//	}
-	
+	public static void main(String[] args) {
+		WaterSensor sensor = new WaterSensor();
+		turnOn();
+		sensor.setWaterLevel(100);
+		sensor.sendMessage();
+
+	}
+	//
+	public static String deviceID = "watersensor";
 	//current water level
 	private int waterLevel;
-	//Boolean for alert
-	public boolean alert;
-	//Boolean for device armed
-	private boolean armed;
+
 	
 	//Initial values for WaterSensor.
     public WaterSensor() {
+    	super(deviceID);
     	waterLevel = 0;
-    	alert = false;
-    	armed= true;
-    }
-    //Chooses if whether or not to arm device.
-    public void armDevice(boolean arm) {
-    	if (arm) {
-    		armed = true;
-    		System.out.println("Water Sensor armed.");
-    	}
-    	else {
-    		armed = false;
-    		System.out.println("Water Sensor disarmed.");
-    	}
-    	
     }
     //Sets water level to be tested
     public void setWaterLevel(int level) {
@@ -60,7 +45,8 @@ public class WaterSensor {
     }
     //Sends Water Sensor Messages.
     public void sendMessage() {
-    	if (alert && armed) {
+    	if (checkWaterLevel() && isOn) {
+    		sendAlert();
     		System.out.println("ALERT! WATER ISSUE DETECTED!");
     	}
     	else {
@@ -68,23 +54,10 @@ public class WaterSensor {
     	}
     	
     }
-    //Sends alarm messages and checks for water levels.
-    public void sendAlert() {
-    	if(checkWaterLevel() && armed) {
-    		alert = true;
-    		sendMessage();
-    	}
-    	else {
-    		alert = false;
-    		sendMessage();
-    	}
-    	
-    }
+
     //resets Water Sensor to initial values.
     public void reset() {
     	waterLevel = 0;
-    	alert = false;
-    	armed = true;
     }
 
 }
