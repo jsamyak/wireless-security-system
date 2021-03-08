@@ -16,6 +16,7 @@ public class SecurityDevice {
     public static boolean isOff;
 
     // Contructor of the class.
+    // @param deviceID the device ID of the device.
     public SecurityDevice(String deviceID) {
         deviceID = SecurityDevice.deviceID;
     }
