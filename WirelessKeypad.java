@@ -14,10 +14,10 @@ public class WirelessKeypad {
 	//Stores the deviceID for the wireless keypad
 	final public static String deviceID = "1";
 	
-	//is this needed?
+	//Stores the current system mode. activate/deactivate/home/away
 	String currentMode;
 	
-	//is this needed?
+	//Stores the password input by the user
 	private String password;
 	
 	//List that stores all the mobile numbers in the system
@@ -43,6 +43,17 @@ public class WirelessKeypad {
 			return true;
 		}
 		return false;
+	}
+	
+	/*
+	 * This method sets the mode of the system by sending the mode
+	 * state to the basestation.
+	 * @param theMode is the mode set by the user
+	 */
+	public static void setMode(String theMode)
+	{
+		BaseStation.changeMode(theMode);
+		System.out.println("The mode has been changed to " + theMode);
 	}
 	
 	/*
