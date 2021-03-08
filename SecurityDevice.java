@@ -13,8 +13,6 @@ public class SecurityDevice {
     // Stores if the device is on.
     public static boolean isOn;
 
-    public static boolean isOff;
-
     // Contructor of the class.
     // @param deviceID the device ID of the device.
     public SecurityDevice(String deviceID) {
@@ -39,12 +37,10 @@ public class SecurityDevice {
     // Turns on the device.
     public static void turnOn() {
         isOn = true;
-        isOff = false;
     }
 
     // Turns off the device.
     public static void turnOff() {
-        isOff = true;
         isOn = false;
     }
 }
