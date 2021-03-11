@@ -1,9 +1,4 @@
-/*
- * TCSS 360 Winter 2021
- * Group 1, Project Assignment 3
- * Author: Kenneth Copeland
- */
-
+// This class represents the Security Camera class in the wireless security system.
 public class SecurityCamera extends SecurityDevice {
 
 	private static boolean motionStatus;
@@ -17,13 +12,11 @@ public class SecurityCamera extends SecurityDevice {
 	}
 
 	// Method getMotionStatus: used to retrieve the motion status of the camera
-
 	boolean getMotionStatus() {
 		return motionStatus;
 	}
 
 	// Method armDevice is used to arm and disarm the camera
-
 	void armDevice(boolean isArmed) {
 		armedStatus = isArmed;
 		if (isArmed) {
@@ -34,7 +27,6 @@ public class SecurityCamera extends SecurityDevice {
 	}
 
 	// Method that generates an alert.
-
 	public void sendAlert() {
 		if (armedStatus && motionStatus) {
 			super.sendAlert("ALERT! Security Camera detects motion.");
@@ -46,8 +38,6 @@ public class SecurityCamera extends SecurityDevice {
 	}
 
 	// Method that sends a message to the MobileNumber class.
-
 	void SendMessage() {
-
 	}
 }
