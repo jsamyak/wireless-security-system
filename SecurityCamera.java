@@ -16,6 +16,14 @@ public class SecurityCamera extends SecurityDevice {
 		return motionStatus;
 	}
 
+	void record() {
+
+	}
+
+	void takeSnapshot() {
+
+	}
+
 	// Method armDevice is used to arm and disarm the camera
 	void armDevice(boolean isArmed) {
 		armedStatus = isArmed;
