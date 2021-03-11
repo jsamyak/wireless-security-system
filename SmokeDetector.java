@@ -1,11 +1,12 @@
-public class SmokeSensor extends SecurityDevice {
+
+public class SmokeDetector extends SecurityDevice {
 
     private static int mySmokeLevel;
     private static final int mySmokeThreshold = 50;
     private static boolean myAlert;
     private static boolean isArmed;
 
-    public SmokeSensor() {
+    public SmokeDetector() {
         super(deviceID);
         mySmokeLevel = 0;
         myAlert = false;
@@ -35,12 +36,4 @@ public class SmokeSensor extends SecurityDevice {
             super.sendAlert("No Smoke Detected");
         }
     }
-
-    /*
-     * Stop Alerting a Fire
-     */
-    public void reset() {
-
-    }
-
 }
