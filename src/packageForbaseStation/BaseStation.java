@@ -1,4 +1,4 @@
-package packageForbaseStation;
+package src.packageForbaseStation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,14 +10,14 @@ public class BaseStation {
 	int SerialNo;
 
 	// map containing deviceID as key and value as security device object
-	HashMap<Integer, SecurityDevice> allDevices;
+	static HashMap<Integer, SecurityDevice> allDevices;
 
 	// keypad object
 	WirelessKeypad theKeypad;
 
 	// some boolean variables
-	boolean isOn;
-	boolean isOff;
+	static boolean isOn;
+	static boolean isOff;
 	boolean hasLowBattery;
 
 	// If base station is on power saving mode
@@ -116,7 +116,7 @@ public class BaseStation {
 	 * 
 	 * @param theMode string mode value received from keypad
 	 */
-	public void changeMode(String theMode) {
+	public static void changeMode(String theMode) {
 
 		if ((theMode.toLowerCase()).equals("deactivate")) {
 
@@ -169,8 +169,8 @@ public class BaseStation {
 	 */
 	public static void turnOn() {
 
-		this.isOff = false;
-		this.isOn = true;
+		isOff = false;
+		isOn = true;
 
 		// Iterate over the device and turn on all device
 		for (int key : allDevices.keySet()) {
@@ -186,8 +186,8 @@ public class BaseStation {
 	 */
 	public static void turnOff() {
 
-		this.isOff = true;
-		this.isOn = false;
+		isOff = true;
+		isOn = false;
 
 		// Iterate over the device and turn on all device
 		for (int key : allDevices.keySet()) {
