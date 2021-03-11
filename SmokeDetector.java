@@ -1,6 +1,8 @@
-
+// This class represents the Smoke Detecotr class in the wireless security system.
 public class SmokeDetector extends SecurityDevice {
 
+    // The device ID of the hardware.
+    public static final String deviceID = "SmokeDetector";
     private static int mySmokeLevel;
     private static final int mySmokeThreshold = 50;
     private static boolean isArmed;

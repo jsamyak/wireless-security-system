@@ -1,23 +1,8 @@
-/*
- * GROUP 1
- * by: Christian Wall
- * TCSS 360 - Winter 2021 Project
- */
-
+// This class represents the Panic button class in the wireless security system.
 public class PanicButton extends SecurityDevice {
 
-	// Driver method for testing.
-	// public static void main(String[] args) {
-	// PanicButton button = new PanicButton();
-	// turnOn();
-	// button.onSilentAlarmMode(true);
-	// button.setRange(50);
-	// button.pressButton();
-	//
-	// }
-
 	// The device ID of the hardware.
-	public static String deviceID = "panicbutton";
+	public static final String deviceID = "Panicbutton";
 	// Boolean for alert
 	public boolean alert;
 	// Boolean for device armed
@@ -45,14 +30,14 @@ public class PanicButton extends SecurityDevice {
 	}
 
 	// Sets the range you are from the device
-	public void setRange(int range) {
+	public void setDistance(int range) {
 		distance = range;
 	}
 
 	// Method that allows you to press panic button.
 	public void pressButton() {
 		if (isInRange()) {
-			sendAlert();
+			super.sendAlert("ALARM ACTIVATED");
 			startAlarm();
 			notifyAuthority();
 		} else {
@@ -64,18 +49,18 @@ public class PanicButton extends SecurityDevice {
 	private void startAlarm() {
 		if (armed && isOn) {
 			alert = true;
-			System.out.println("ALERT! PANIC BUTTON PRESSED!");
+			super.sendAlert("ALARM! PANIC BUTTON PRESSED!");
 		} else {
-			System.out.println("Panic Button was pressed on silent mode.");
+			super.sendAlert("Panic Button was pressed on silent mode.");
 		}
 	}
 
 	// Method that notifies if the authorities have been called.
 	private void notifyAuthority() {
 		if (armed && isOn) {
-			System.out.println("The nearby authorities are on their way!");
+			super.sendAlert("The nearby authorities are on their way!");
 		} else {
-			System.out.println("The authorities have not been contacted.");
+			super.sendAlert("The authorities have not been contacted.");
 		}
 	}
 

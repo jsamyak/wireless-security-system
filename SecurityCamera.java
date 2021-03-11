@@ -1,6 +1,8 @@
 // This class represents the Security Camera class in the wireless security system.
 public class SecurityCamera extends SecurityDevice {
 
+	// The device ID of the hardware.
+	public static final String deviceID = "SecurityCamera";
 	private static boolean motionStatus;
 	private static boolean armedStatus;
 	public static boolean alert;

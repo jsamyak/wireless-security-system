@@ -1,9 +1,4 @@
-/*
- * GROUP 1
- * by: Christian Wall
- * TCSS 360 - Winter 2021 Project
- */
-
+// This class represents the Water sensor class in the wireless security system.
 public class WaterSensor extends SecurityDevice {
 
 	// Driver Method for testing.
