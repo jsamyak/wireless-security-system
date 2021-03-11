@@ -25,8 +25,8 @@ public class SecurityDevice {
     }
 
     // Sends an alert if the any sensor / detector is triggered.
-    public static void sendAlert() {
-        System.out.println("SECURITY ALERT");
+    public static void sendAlert(String displayText) {
+        System.out.println(displayText);
     }
 
     // Returns the device ID of the device.
