@@ -4,27 +4,28 @@
  * Author: Kenneth Copeland
  */
 
-public class SecurityCamera {
+public class SecurityCamera extends SecurityDevice {
 
-	private boolean motionStatus;
-	private boolean armedStatus;
-	public boolean alert;
+	private static boolean motionStatus;
+	private static boolean armedStatus;
+	public static boolean alert;
 
 	public SecurityCamera() {
-		this.motionStatus = false;
-		this.armedStatus = true;
+		super(deviceID);
+		motionStatus = false;
+		armedStatus = true;
 	}
 
 	// Method getMotionStatus: used to retrieve the motion status of the camera
 
 	boolean getMotionStatus() {
-		return this.motionStatus;
+		return motionStatus;
 	}
 
 	// Method armDevice is used to arm and disarm the camera
 
 	void armDevice(boolean isArmed) {
-		this.armedStatus = isArmed;
+		armedStatus = isArmed;
 		if (isArmed) {
 			System.out.print("Security Camera armed.");
 		} else {
@@ -34,13 +35,13 @@ public class SecurityCamera {
 
 	// Method that generates an alert.
 
-	void sendAlert() {
-		if (this.armedStatus && this.motionStatus) {
-			System.out.print("ALERT! Security Camera detects motion.");
-		} else if (this.armedStatus) {
-			System.out.print("No motion detected by Security Camera.");
+	public void sendAlert() {
+		if (armedStatus && motionStatus) {
+			super.sendAlert("ALERT! Security Camera detects motion.");
+		} else if (armedStatus) {
+			super.sendAlert("No motion detected by Security Camera.");
 		} else {
-			System.out.print("The Security Camera is not armed.");
+			super.sendAlert("The Security Camera is not armed.");
 		}
 	}
 

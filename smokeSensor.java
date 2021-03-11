@@ -6,21 +6,20 @@
  *
  */
 
-public class smokeSensor {
+public class SmokeSensor extends SecurityDevice {
 
-	private int mySmokeLevel = 0;
-	private static int mySmokeThreshold = 50;
-	private boolean myAlert = false;
-	private boolean isArmed = true;
+	private static int mySmokeLevel;
+	private static final int mySmokeThreshold = 50;
+	private static boolean myAlert = false;
+	private static boolean isArmed = true;
 
-	public void setSmokeLevel(int theSmokeLevel) {
-		mySmokeLevel = theSmokeLevel;
-
+	public SmokeSensor() {
+		super(deviceID);
+		mySmokeLevel = 0;
 	}
 
 	public int getSmokeLevel() {
 		return mySmokeLevel;
-
 	}
 
 	private void armDevice(boolean isArmed) {
@@ -33,7 +32,7 @@ public class smokeSensor {
 		}
 	}
 
-	public void sendAlert() {
+	public static void sendAlert() {
 		if (isArmed && (mySmokeLevel >= mySmokeThreshold)) {
 			myAlert = true;
 			System.out.println("ALERT! SMOKE  DETECTED!");
