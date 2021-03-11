@@ -52,11 +52,11 @@ public class smokeSensor {
 		isArmed = true;
 	}
 
-//	public static void main(String args[]) {
-	//	smokeSensor sensor = new smokeSensor();
-	//	sensor.setSmokeLevel(49);
-	//	sensor.armDevice(true);
-	//	sensor.sendAlert();
+	// public static void main(String args[]) {
+	// smokeSensor sensor = new smokeSensor();
+	// sensor.setSmokeLevel(49);
+	// sensor.armDevice(true);
+	// sensor.sendAlert();
 
-//	}
+	// }
 }
