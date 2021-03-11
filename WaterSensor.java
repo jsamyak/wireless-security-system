@@ -1,16 +1,6 @@
 // This class represents the Water sensor class in the wireless security system.
 public class WaterSensor extends SecurityDevice {
 
-	// Driver Method for testing.
-	public static void main(String[] args) {
-		WaterSensor sensor = new WaterSensor();
-		turnOn();
-		sensor.setWaterLevel(100);
-		sensor.sendMessage();
-
-	}
-
-	//
 	public static String deviceID = "watersensor";
 	// current water level
 	private int waterLevel;
@@ -41,13 +31,16 @@ public class WaterSensor extends SecurityDevice {
 	}
 
 	// Sends Water Sensor Messages.
-	public void sendMessage() {
+	public void sendAlert() {
 		if (checkWaterLevel() && isOn) {
-			sendAlert();
-			System.out.println("ALERT! WATER ISSUE DETECTED!");
+			super.sendAlert("ALERT! WATER ISSUE DETECTED!");
 		} else {
-			System.out.println("Water Sensor detects no problems.");
+			super.sendAlert("Water Sensor detects no problems.");
 		}
+
+	}
+
+	public void sendMessage() {
 
 	}
 

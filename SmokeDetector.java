@@ -17,7 +17,7 @@ public class SmokeDetector extends SecurityDevice {
         return mySmokeLevel;
     }
 
-    private void armDevice(boolean isArmed) {
+    public void armDevice(boolean isArmed) {
         if (isArmed) {
             System.out.println("Smoke Sensor armed.");
         } else {
