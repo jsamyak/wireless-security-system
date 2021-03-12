@@ -39,11 +39,11 @@ public class SecurityCamera extends SecurityDevice {
 	// Method that generates an alert.
 	public void sendAlert() {
 		if (armedStatus && motionStatus) {
-			super.sendAlert("ALERT! Security Camera detects motion.");
+			super.sendAlert("ALERT! Security Camera detects motion.", deviceID);
 		} else if (armedStatus) {
-			super.sendAlert("No motion detected by Security Camera.");
+			super.sendAlert("No motion detected by Security Camera.", deviceID);
 		} else {
-			super.sendAlert("The Security Camera is not armed.");
+			super.sendAlert("The Security Camera is not armed.", deviceID);
 		}
 	}
 

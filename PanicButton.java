@@ -19,13 +19,13 @@ public class PanicButton extends SecurityDevice {
 	}
 
 	// Chooses whether or not Panic Button is on silent or not
-	public void onSilentAlarmMode(boolean mode) {
+	public String onSilentAlarmMode(boolean mode) {
 		if (mode) {
 			armed = false;
-			System.out.println("Panic Button is now on Silent Mode.");
+			return ("Panic Button is now on Silent Mode.");
 		} else {
 			armed = true;
-			System.out.println("Panic Button is off Silent Mode.");
+			return ("Panic Button is off Silent Mode.");
 		}
 	}
 
@@ -37,7 +37,7 @@ public class PanicButton extends SecurityDevice {
 	// Method that allows you to press panic button.
 	public void pressButton() {
 		if (isInRange()) {
-			super.sendAlert("ALARM ACTIVATED");
+			super.sendAlert("ALARM ACTIVATED", deviceID);
 			startAlarm();
 			notifyAuthority();
 		} else {
@@ -47,20 +47,20 @@ public class PanicButton extends SecurityDevice {
 
 	// Method that chooses correct alarm output.
 	private void startAlarm() {
-		if (armed && isOn) {
+		if (armed && isConnected) {
 			alert = true;
-			super.sendAlert("ALARM! PANIC BUTTON PRESSED!");
+			super.sendAlert("ALARM! PANIC BUTTON PRESSED!", deviceID);
 		} else {
-			super.sendAlert("Panic Button was pressed on silent mode.");
+			super.sendAlert("Panic Button was pressed on silent mode.", deviceID);
 		}
 	}
 
 	// Method that notifies if the authorities have been called.
 	private void notifyAuthority() {
-		if (armed && isOn) {
-			super.sendAlert("The nearby authorities are on their way!");
+		if (armed && isConnected) {
+			super.sendAlert("The nearby authorities are on their way!", deviceID);
 		} else {
-			super.sendAlert("The authorities have not been contacted.");
+			super.sendAlert("The authorities have not been contacted.", deviceID);
 		}
 	}
 

@@ -33,9 +33,9 @@ public class WaterSensor extends SecurityDevice {
 	// Sends Water Sensor Messages.
 	public void sendAlert() {
 		if (checkWaterLevel() && isOn) {
-			super.sendAlert("ALERT! WATER ISSUE DETECTED!");
+			super.sendAlert("ALERT! WATER ISSUE DETECTED!", deviceID);
 		} else {
-			super.sendAlert("Water Sensor detects no problems.");
+			super.sendAlert("Water Sensor detects no problems.", deviceID);
 		}
 
 	}
