@@ -26,13 +26,17 @@ public class SmokeDetector extends SecurityDevice {
     }
 
     public void sendAlert() {
-        if (isArmed && (mySmokeLevel >= mySmokeThreshold)) {
-            super.sendAlert("ALERT! SMOKE  DETECTED!");
+        if (isArmed && (mySmokeLevel > mySmokeThreshold)) {
+            super.sendAlert("ALERT! SMOKE  DETECTED!", deviceID);
         } else {
-            super.sendAlert("No Smoke Detected");
+            super.sendAlert("No Smoke Detected", deviceID);
         }
     }
 
+    public void setSmokeLevel(int level){
+        this.mySmokeLevel = level;
+    }
+    
     // Method that sends a message to the MobileNumber class.
     void SendMessage() {
     }

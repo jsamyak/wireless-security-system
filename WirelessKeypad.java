@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import src.packageForbaseStation.BaseStation;
-
 /*
  * This class is for the wireless keypad of the home security system. This
  * class is responsible for login procedures, adding/removing mobile numbers, 
@@ -39,7 +37,7 @@ public class WirelessKeypad {
 	 * @param password is the password entered by the user
 	 */
 	public static boolean checkPassword(String password) {
-		if (password == masterPass) {
+		if (password.equals(masterPass)) {
 			return true;
 		}
 		return false;
@@ -51,11 +49,16 @@ public class WirelessKeypad {
 	 * 
 	 * @param theMode is the mode set by the user
 	 */
-	public static void setMode(String theMode) {
+	public static String setMode(String theMode) {
 		BaseStation.changeMode(theMode);
-		System.out.println("The mode has been changed to " + theMode);
+                if(theMode.equals("deactivate"))
+                    return ("System is deactivated now! Be careful");
+                
+		return ("The mode has been changed to " + theMode);
 	}
 
+        static String alertt  = "";
+        
 	/*
 	 * This method displays an alert to the user. The alert is triggered if one of
 	 * the system devices discovers a problem.
@@ -64,9 +67,17 @@ public class WirelessKeypad {
 	 * 
 	 * @param id is for the id of the device that sends the alert
 	 */
-	public static void displayAlert(String alert, int id) {
-		System.out.println("Alert!! \nReceived from Device " + id + " : " + alert);
+	public static void displayAlert(String alert, String id) {
+//            System.out.println("Here");
+		alertt =  alertt + "\n" + ("Alert!! \nReceived from Device " + id + " : " + alert);
 	}
+        
+        public String getAlert(){
+//            System.out.println("\n"+alertt);
+            String str = alertt;
+            alertt = "";
+            return str;
+        }
 
 	/*
 	 * This method displays an message to the user. The message is triggered if one
@@ -76,7 +87,7 @@ public class WirelessKeypad {
 	 * 
 	 * @param id is for the id of the device that sends the message
 	 */
-	public static void displayMessage(String msg, int id) {
+	public static void displayMessage(String msg, String id) {
 		System.out.println("Message!! \nReceived from Device " + id + " : " + msg);
 	}
 
@@ -106,13 +117,15 @@ public class WirelessKeypad {
 	 * @param mobileNumber is the number the user selects to be removed from the
 	 * system
 	 */
-	private static void removeMobileNo(String mobileNumber) {
+	public static String removeMobileNo(String mobileNumber) {
 		for (String number : mobileNumbers) {
-			if (number == mobileNumber) {
+			if (number.equals(mobileNumber)) {
 				mobileNumbers.remove(number);
-				System.out.println("Your mobile phone number has successfully been removed!");
+				 return ("Your mobile phone number has successfully been removed!");
 			}
 		}
+                
+                return "NO Number found in database!";
 	}
 
 	/*
@@ -120,10 +133,10 @@ public class WirelessKeypad {
 	 * 
 	 * @param mobileNumber is the number the user selects to be added to the system
 	 */
-	private static void addMobileNo(String mobileNumber) {
+	public static String addMobileNo(String mobileNumber) {
 		mobileNumbers.add(mobileNumber);
 
-		System.out.println("Your mobile phone number has successfully been added!");
+		 return ("Your mobile phone number has successfully been added!");
 	}
 
 	/*

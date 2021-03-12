@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg360_gui;
+
+
+import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,6 +15,8 @@ package pkg360_gui;
  */
 public class controller extends javax.swing.JFrame {
 
+    static WirelessKeypad keypad;
+      
     /**
      * Creates new form controller
      */
@@ -29,7 +35,6 @@ public class controller extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         mainDisplay = new javax.swing.JTextArea();
-        enter = new javax.swing.JButton();
         disarm = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         one = new javax.swing.JButton();
@@ -37,23 +42,28 @@ public class controller extends javax.swing.JFrame {
         three = new javax.swing.JButton();
         four = new javax.swing.JButton();
         five = new javax.swing.JButton();
-        siz = new javax.swing.JButton();
+        six = new javax.swing.JButton();
         seven = new javax.swing.JButton();
         eight = new javax.swing.JButton();
         nine = new javax.swing.JButton();
         zero = new javax.swing.JButton();
         delete = new javax.swing.JButton();
+        enter = new javax.swing.JButton();
         away = new javax.swing.JButton();
         home = new javax.swing.JButton();
         statuscheck = new javax.swing.JButton();
         panicBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        smokelvl = new javax.swing.JCheckBox();
+        waterLvl = new javax.swing.JCheckBox();
+        motion = new javax.swing.JCheckBox();
         runTest = new javax.swing.JButton();
+        panic = new javax.swing.JCheckBox();
         rmvMob = new javax.swing.JButton();
         addMob = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        userInput = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,8 +71,6 @@ public class controller extends javax.swing.JFrame {
         mainDisplay.setRows(5);
         mainDisplay.setText("Welcome! \n");
         jScrollPane1.setViewportView(mainDisplay);
-
-        enter.setText("Enter");
 
         disarm.setText("DISARM");
         disarm.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +87,9 @@ public class controller extends javax.swing.JFrame {
         });
 
         two.setText("2");
+        two.setMaximumSize(new java.awt.Dimension(35, 35));
+        two.setMinimumSize(new java.awt.Dimension(35, 35));
+        two.setPreferredSize(new java.awt.Dimension(35, 35));
         two.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 twoActionPerformed(evt);
@@ -93,6 +104,7 @@ public class controller extends javax.swing.JFrame {
         });
 
         four.setText("4");
+        four.setPreferredSize(new java.awt.Dimension(35, 35));
         four.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fourActionPerformed(evt);
@@ -100,20 +112,23 @@ public class controller extends javax.swing.JFrame {
         });
 
         five.setText("5");
+        five.setPreferredSize(new java.awt.Dimension(35, 35));
         five.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fiveActionPerformed(evt);
             }
         });
 
-        siz.setText("6");
-        siz.addActionListener(new java.awt.event.ActionListener() {
+        six.setText("6");
+        six.setPreferredSize(new java.awt.Dimension(35, 35));
+        six.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sizActionPerformed(evt);
+                sixActionPerformed(evt);
             }
         });
 
         seven.setText("7");
+        seven.setPreferredSize(new java.awt.Dimension(35, 35));
         seven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sevenActionPerformed(evt);
@@ -128,6 +143,8 @@ public class controller extends javax.swing.JFrame {
         });
 
         nine.setText("9");
+        nine.setMaximumSize(new java.awt.Dimension(25, 25));
+        nine.setMinimumSize(new java.awt.Dimension(25, 25));
         nine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nineActionPerformed(evt);
@@ -142,9 +159,17 @@ public class controller extends javax.swing.JFrame {
         });
 
         delete.setText("X");
+        delete.setPreferredSize(new java.awt.Dimension(35, 35));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
+            }
+        });
+
+        enter.setText("Enter");
+        enter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterActionPerformed(evt);
             }
         });
 
@@ -158,32 +183,33 @@ public class controller extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(one)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(two)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(three)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(four, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(seven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(zero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(zero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(siz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(nine))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(four, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                                    .addComponent(seven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(six, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,28 +217,32 @@ public class controller extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(two, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(four, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(siz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(six, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seven, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zero, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         away.setText("AWAY");
+        away.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                awayActionPerformed(evt);
+            }
+        });
 
         home.setText("HOME");
         home.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +252,11 @@ public class controller extends javax.swing.JFrame {
         });
 
         statuscheck.setText("Status Check");
+        statuscheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statuscheckActionPerformed(evt);
+            }
+        });
 
         panicBtn.setText("Panc Button");
         panicBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -230,14 +265,24 @@ public class controller extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("set High Smoke Level");
-
-        jCheckBox2.setText("set High Water Level");
-
-        jCheckBox4.setText("Motion Detector..");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        smokelvl.setText("set High Smoke Level");
+        smokelvl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                smokelvlActionPerformed(evt);
+            }
+        });
+
+        waterLvl.setText("set High Water Level");
+        waterLvl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waterLvlActionPerformed(evt);
+            }
+        });
+
+        motion.setText("Motion Detector..");
+        motion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motionActionPerformed(evt);
             }
         });
 
@@ -248,38 +293,70 @@ public class controller extends javax.swing.JFrame {
             }
         });
 
+        panic.setText("Silent Mode : Panic Button");
+        panic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                panicActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox4)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(runTest, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(waterLvl)
+                            .addComponent(smokelvl)
+                            .addComponent(motion, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panic)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(runTest, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(jCheckBox2)
+                .addComponent(waterLvl)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(smokelvl)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox4)
+                .addComponent(motion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panic)
                 .addGap(18, 18, 18)
                 .addComponent(runTest, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         rmvMob.setText("Remove Phone Number");
+        rmvMob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmvMobActionPerformed(evt);
+            }
+        });
 
         addMob.setText("Add Phone Number");
+        addMob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMobActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("User Input");
+
+        userInput.setColumns(20);
+        userInput.setRows(5);
+        jScrollPane2.setViewportView(userInput);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,67 +364,73 @@ public class controller extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(away)
+                                .addGap(39, 39, 39)
+                                .addComponent(home)))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(disarm)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(statuscheck)
+                                .addGap(18, 18, 18)
+                                .addComponent(panicBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rmvMob, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(addMob, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(away)
-                        .addGap(18, 18, 18)
-                        .addComponent(home)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(disarm)
-                        .addGap(18, 18, 18)
-                        .addComponent(statuscheck)
-                        .addGap(18, 18, 18)
-                        .addComponent(panicBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rmvMob, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addMob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(disarm, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(away, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(statuscheck, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panicBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(disarm, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(away, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(statuscheck, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(panicBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(addMob, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(12, 12, 12)
                                 .addComponent(rmvMob, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -355,72 +438,168 @@ public class controller extends javax.swing.JFrame {
 
     private void twoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoActionPerformed
         // TODO add your handling code here:
-        mainDisplay.append(2+"");
+        userInput.append(2+"");
     }//GEN-LAST:event_twoActionPerformed
 
     private void oneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneActionPerformed
         // TODO add your handling code here:
-        mainDisplay.append(1+"");
+        userInput.append(1+"");
         
     }//GEN-LAST:event_oneActionPerformed
 
     private void threeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeActionPerformed
         // TODO add your handling code here:
-
+        userInput.append(3+"");
     }//GEN-LAST:event_threeActionPerformed
 
     private void fiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveActionPerformed
         // TODO add your handling code here:
+        userInput.append(5+"");
     }//GEN-LAST:event_fiveActionPerformed
 
     private void fourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourActionPerformed
         // TODO add your handling code here:
+       userInput.append(4+"");
+
     }//GEN-LAST:event_fourActionPerformed
 
     private void sevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevenActionPerformed
         // TODO add your handling code here:
+        userInput.append(7+"");
+
     }//GEN-LAST:event_sevenActionPerformed
 
-    private void sizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizActionPerformed
+    private void sixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sizActionPerformed
+        userInput.append(6+"");
+
+    }//GEN-LAST:event_sixActionPerformed
 
     private void eightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eightActionPerformed
         // TODO add your handling code here:
+        userInput.append(8+"");
     }//GEN-LAST:event_eightActionPerformed
 
     private void nineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nineActionPerformed
         // TODO add your handling code here:
+        userInput.append(9+"");
     }//GEN-LAST:event_nineActionPerformed
 
     private void zeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroActionPerformed
         // TODO add your handling code here:
+        userInput.append(0+"");
     }//GEN-LAST:event_zeroActionPerformed
 
     private void runTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runTestActionPerformed
         // TODO add your handling code here:
+        wt.sendAlert();
+        mainDisplay.append("\n"+keypad.getAlert());
+        ss.sendAlert();
+        mainDisplay.append("\n"+keypad.getAlert());
     }//GEN-LAST:event_runTestActionPerformed
 
     private void disarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disarmActionPerformed
         // TODO add your handling code here:
+                mainDisplay.append("\n"+keypad.setMode("deactivate"));
+
     }//GEN-LAST:event_disarmActionPerformed
 
     private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
         // TODO add your handling code here:
+                mainDisplay.append("\n"+keypad.setMode("home"));
     }//GEN-LAST:event_homeActionPerformed
 
     private void panicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panicBtnActionPerformed
         // TODO add your handling code here:
+       pbt.pressButton();
+       mainDisplay.append("\n"+keypad.getAlert());
     }//GEN-LAST:event_panicBtnActionPerformed
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+    private void motionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_motionActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
+        String str = userInput.getText();
+        
+        // Removing first and last character 
+        // of a string using substring() method 
+        str = str.substring(0, str.length() - 1); 
+        userInput.setText("");
+        userInput.append(str);
+        
+        // Return the modified string 
     }//GEN-LAST:event_deleteActionPerformed
 
+    private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterActionPerformed
+        // TODO add your handling code here:
+        String input = userInput.getText();
+        userInput.setText("");
+        if(keypad.checkPassword(input)){
+            mainDisplay.append("\n"+"Corrent Password");
+        }else{
+            mainDisplay.append("\n"+"Wrong Password, Try Again");
+        }
+    }//GEN-LAST:event_enterActionPerformed
+
+    private void statuscheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statuscheckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statuscheckActionPerformed
+
+    private void awayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_awayActionPerformed
+        // TODO add your handling code here:
+        mainDisplay.append("\n"+keypad.setMode("away"));
+    }//GEN-LAST:event_awayActionPerformed
+
+    private void addMobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMobActionPerformed
+        // TODO add your handling code here:
+        String num = userInput.getText();
+                userInput.setText("");
+
+        mainDisplay.append("\n"+keypad.addMobileNo(num));
+    }//GEN-LAST:event_addMobActionPerformed
+
+    private void rmvMobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmvMobActionPerformed
+        // TODO add your handling code here:
+        String num = userInput.getText();
+                userInput.setText("");
+
+        mainDisplay.append("\n"+keypad.removeMobileNo(num));
+    }//GEN-LAST:event_rmvMobActionPerformed
+
+    private void panicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panicActionPerformed
+        // TODO add your handling code here:
+        if(panic.isSelected())
+            mainDisplay.append("\n"+pbt.onSilentAlarmMode(true));
+        else
+            mainDisplay.append("\n"+pbt.onSilentAlarmMode(false));
+        
+    }//GEN-LAST:event_panicActionPerformed
+
+    private void waterLvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterLvlActionPerformed
+        // TODO add your handling code here:
+        if(waterLvl.isSelected()){
+            wt.setWaterLevel(51);
+        }else{
+            wt.setWaterLevel(0);
+        }
+    }//GEN-LAST:event_waterLvlActionPerformed
+
+    private void smokelvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smokelvlActionPerformed
+        // TODO add your handling code here:
+        if(smokelvl.isSelected()){
+            ss.setSmokeLevel(51);
+        }else{
+            ss.setSmokeLevel(0);
+        }
+    }//GEN-LAST:event_smokelvlActionPerformed
+
+    static PanicButton pbt;
+    static WaterSensor wt;
+    static SmokeDetector ss;
+    static SecurityCamera scam;
+    
     /**
      * @param args the command line arguments
      */
@@ -448,6 +627,20 @@ public class controller extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        keypad = new WirelessKeypad();
+        
+        wt = new WaterSensor();
+        pbt = new PanicButton();
+        ss = new SmokeDetector();
+        scam = new SecurityCamera();
+        
+        List<SecurityDevice> sd = new ArrayList<>();
+        sd.add(wt);
+        sd.add(pbt);
+        sd.add(ss);
+        sd.add(scam);
+        BaseStation base = new BaseStation(sd);
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -466,23 +659,27 @@ public class controller extends javax.swing.JFrame {
     private javax.swing.JButton five;
     private javax.swing.JButton four;
     private javax.swing.JButton home;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea mainDisplay;
+    private javax.swing.JCheckBox motion;
     private javax.swing.JButton nine;
     private javax.swing.JButton one;
+    private javax.swing.JCheckBox panic;
     private javax.swing.JButton panicBtn;
     private javax.swing.JButton rmvMob;
     private javax.swing.JButton runTest;
     private javax.swing.JButton seven;
-    private javax.swing.JButton siz;
+    private javax.swing.JButton six;
+    private javax.swing.JCheckBox smokelvl;
     private javax.swing.JButton statuscheck;
     private javax.swing.JButton three;
     private javax.swing.JButton two;
+    private javax.swing.JTextArea userInput;
+    private javax.swing.JCheckBox waterLvl;
     private javax.swing.JButton zero;
     // End of variables declaration//GEN-END:variables
 }
