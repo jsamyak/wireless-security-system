@@ -8,10 +8,13 @@ public class SecurityDevice {
     public static boolean isBatteryLow;
 
     // Stores the state of connection.
-    public static boolean isConnected;
+    public static boolean isConnected = true;
 
     // Stores if the device is on.
-    public static boolean isOn;
+    public static boolean isOn = true;
+    
+    public String DeviceName;
+    
 
     // Contructor of the class.
     // @param deviceID the device ID of the device.
@@ -25,8 +28,8 @@ public class SecurityDevice {
     }
 
     // Sends an alert if the any sensor / detector is triggered.
-    public static void sendAlert(String displayText) {
-        System.out.println(displayText);
+    public static void sendAlert(String displayText, String id) {
+        BaseStation.SendAlert(displayText, id);
     }
 
     // Returns the device ID of the device.
