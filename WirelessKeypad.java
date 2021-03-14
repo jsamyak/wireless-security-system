@@ -12,7 +12,7 @@ public class WirelessKeypad {
 	final private static String masterPass = "1234";
 
 	// Stores the deviceID for the wireless keypad
-	final public static String deviceID = "1";
+	final public static String deviceID = "wirelesskeypad";
 
 	// Stores the current system mode. activate/deactivate/home/away
 	String currentMode;
@@ -27,7 +27,7 @@ public class WirelessKeypad {
 	 * Constructor
 	 */
 	public WirelessKeypad() {
-
+            
 	}
 
 	/*
@@ -68,12 +68,10 @@ public class WirelessKeypad {
 	 * @param id is for the id of the device that sends the alert
 	 */
 	public static void displayAlert(String alert, String id) {
-//            System.out.println("Here");
 		alertt =  alertt + "\n" + ("Alert!! \nReceived from Device " + id + " : " + alert);
 	}
         
         public String getAlert(){
-//            System.out.println("\n"+alertt);
             String str = alertt;
             alertt = "";
             return str;
@@ -97,18 +95,10 @@ public class WirelessKeypad {
 	 * 
 	 * @param deviceID is the id for an individual device in the system.
 	 */
-	public static void checkStatus(String deviceID) {
-		System.out.println("Status Check is complete");
-		System.out.println("");
+	public  String checkStatus(String deviceID) {
+            
+            return BaseStation.checkStatus(deviceID);
 	}
-
-	/*
-	 * IN PROGRESS This method adds a device to the list of devices in the system.
-	 */
-	// public static void addDevice(String deviceID)
-	// {
-	// how does adddevice interact with the devicelist in Basestation class
-	// }
 
 	/*
 	 * This method removes a mobile phone number from the list of numbers in the
@@ -134,10 +124,20 @@ public class WirelessKeypad {
 	 * @param mobileNumber is the number the user selects to be added to the system
 	 */
 	public static String addMobileNo(String mobileNumber) {
-		mobileNumbers.add(mobileNumber);
+            String regexStr = "^[0-9]{10}$";
 
-		 return ("Your mobile phone number has successfully been added!");
-	}
+            if (mobileNumbers.contains(mobileNumber))
+            {
+                return ("Your mobile phone number is already in the system.");
+            }
+            if (mobileNumber.matches(regexStr))
+            {
+                mobileNumbers.add(mobileNumber);
+                return ("Your mobile phone number has successfully been added!");
+            } else {
+                return ("Invalid number. Please enter a 10 digit phone number.");
+            }    
+       }
 
 	/*
 	 * This method turns off the system.

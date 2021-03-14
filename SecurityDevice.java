@@ -2,7 +2,7 @@
 public class SecurityDevice {
 
     // The device ID of the hardware.
-    public static String deviceID;
+    public String deviceID;
 
     // Stores the status of if battery is low.
     public static boolean isBatteryLow;
@@ -19,12 +19,26 @@ public class SecurityDevice {
     // Contructor of the class.
     // @param deviceID the device ID of the device.
     public SecurityDevice(String deviceID) {
-        deviceID = SecurityDevice.deviceID;
+        this.deviceID = deviceID;
     }
 
     // Returns the status of the device.
-    public static boolean doStatusCheck() {
-        return isConnected;
+    public String doStatusCheck() {
+        String sts = "\n" + deviceID + "\n";
+        if(isConnected)
+            sts += "Device is connected \n";
+        else
+            sts += "Device is not connected \n";
+        
+        if(isOn)
+            sts += "Device is On \n";
+        else
+            sts += "Device is Off \n";
+        
+        if(isBatteryLow)
+            sts += "Device's battery is Low";
+        
+        return sts;
     }
 
     // Sends an alert if the any sensor / detector is triggered.
@@ -33,7 +47,7 @@ public class SecurityDevice {
     }
 
     // Returns the device ID of the device.
-    public static String getDeviceID() {
+    public String getDeviceID() {
         return deviceID;
     }
 
