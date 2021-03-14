@@ -37,7 +37,6 @@ public class BaseStation {
 
 		// add all security devices in the map<>
 		for (SecurityDevice d : linkedDevice) {
-
 			allDevices.put(d.deviceID, d);
 		}
 	}
@@ -45,15 +44,21 @@ public class BaseStation {
 	/**
 	 * Method to check status of the given device ID
 	 * 
-	 * @param DeviceID int type
+	 * @param DeviceID String type
 	 * @return String representation of the check status
 	 */
-	public String checkStatus(int DeviceID) {
+	public static String checkStatus(String DeviceID) {
 
+                if(allDevices.containsKey(DeviceID)){
+            
 		// calls the device's check status method
 		String status = (allDevices.get(DeviceID)).doStatusCheck()+"";
 
 		return status;
+                }
+                else{
+                    return "Invalid Device ID";
+                }
 	}
 
 	public boolean activateDevice(int DeviceID) {
